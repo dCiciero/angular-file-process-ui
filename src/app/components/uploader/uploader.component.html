@@ -1,0 +1,151 @@
+<div class="container">
+    <h3></h3>
+    <div class="mb-3">
+        <fieldset style="all: revert; border: 1px solid #e0e0e0; padding: 10px;">
+            <legend style="all: revert; border-style: none; border-width: 0; font-size: 18px; line-height: 30px;
+                    margin-bottom: 0; width: auto; padding: 0 10px; border: 1px solid #e0e0e0;">
+                Uploads
+            </legend>
+            <!-- <form action="" (ngSubmit)="upload()"> -->
+                <div class="mb-3">
+                    <label for="fileUpload" class="form-label">File:</label>
+                    <input type="file" class="form-control form-control-sm" id="fileUpload" name="file" accept=".csv,.xls,.xlsx" (change)="selectFile($event)" />
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                            Upload Document 
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <button class="btn btn-success btn-sm"  (click)="processDoc()">
+                            Process Output 
+                        </button>
+                    </div>
+                </div>
+            <!-- </form> -->
+            
+            <!-- <div class="row">
+                <div class="col">
+                <label class="btn btn-default p-0">
+                    <input type="file" (change)="selectFile($event)" />
+                </label>
+                </div>
+            
+                <div class="col-4">
+                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                    Upload
+                </button>
+                </div>
+            </div>
+            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                Generate Output
+            </button> -->
+            
+            <div *ngIf="currentFile" class="progress my-3">
+                <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progress + '%' }"
+                >
+                {{ progress }}%
+                </div>
+            </div>
+            
+            <div *ngIf="message" class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}</div>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">File Name</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <tr *ngFor="let file of files"> -->
+                        <tr>
+                            <td>#</td>
+                            <td>{{ files }}</td>
+                            <td>
+                                <input type="button" class="btn btn-success btn-sm" (click)="downloadfile()" value="Download Test File">
+                            </td>
+                        </tr>
+                      </tbody>
+                </table>
+            </div>
+            <!-- <div class="card mb-3">
+                <div class="card-header">List of Files</div>
+                <ul class="list-group list-group-flush">
+                <li *ngFor="let file of fileInfos | async" class="list-group-item">
+                    <a href="{{ file.url }}">{{ file.name }}</a>
+                </li>
+                </ul>
+            </div> -->
+        </fieldset>
+    </div>
+
+    <div class="mb-3">
+        <fieldset style="all: revert; border: 1px solid #e0e0e0; padding: 10px;">
+            <legend style="all: revert; border-style: none; border-width: 0; font-size: 18px; line-height: 30px;
+                    margin-bottom: 0; width: auto; padding: 0 10px; border: 1px solid #e0e0e0;">
+            Output
+        </legend>
+            <div class="row mb-3">
+                <label for="divisibleBy3" class="col-sm-3 col-form-label">Numbers divisible by 3</label>
+                <div class="col-sm-9 ">
+                <!-- <label for="divisibleBy3.1" class=" col-form-label border border-secondary">{{ divBy3}}</label> -->
+                <input type="text" class="form-control form-control-sm" id="divisibleBy3" [value]="divBy3" disabled readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="divisibleBy5" class="col-sm-3 col-form-label">Numbers divisible by 5</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="divisibleBy5" [value]="divBy5" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="divisibleBy7" class="col-sm-3 col-form-label">Numbers divisible by 7</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="divisibleBy7" [value]="divBy7" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="oddNumbers" class="col-sm-3 col-form-label">All Even Numbers</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="evenNumbers" [value]="evenNums" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="oddNumbers" class="col-sm-3 col-form-label">All Odd Numbers</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="oddNumbers" [value]="oddNums" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="modeNumder" class="col-sm-3 col-form-label">Mode</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="modeNumder" [value]="modeNum" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="medianNumder" class="col-sm-3 col-form-label">Median</label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="medianNumder" [value]="medianNum" disabled>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="sumOfNumbers" class="col-sm-12 col-form-label">Smallest set of numbers greater than 100 when added together.</label>
+                <div class="col-sm-12">
+                    <textarea class="form-control form-control-sm" placeholder="Sum of numbers greater than 100" id="sumOfNumbers"></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
