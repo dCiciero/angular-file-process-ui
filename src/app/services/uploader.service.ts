@@ -10,7 +10,7 @@ export class UploaderService {
   private baseUrl = 'https://ogcicero-dev.azurewebsites.net';   //'http://localhost:5098'; // 
   files?: any = [];
   fileContentType = "";
-  divBy3 = '';
+  divBy3 = ''; 
   divBy5 ="";
   divBy7 = '';
   evenNums = "";

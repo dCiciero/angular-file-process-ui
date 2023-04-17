@@ -141,9 +141,9 @@
             </div>
 
             <div class="row mb-3">
-                <label for="sumOfNumbers" class="col-sm-12 col-form-label">Smallest set of numbers greater than 100 when added together.</label>
-                <div class="col-sm-12">
-                    <textarea class="form-control form-control-sm" placeholder="Sum of numbers greater than 100" id="sumOfNumbers"></textarea>
+                <label for="sumOfNumbers" class="col-sm-3 col-form-label">Smallest set of numbers greater than 100 when added together.</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm" placeholder="Sum of numbers greater than 100" id="sumOfNumbers" [value]="setsOfNumbasAbove100" disabled />
                 </div>
             </div>
         </fieldset>

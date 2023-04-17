@@ -23,6 +23,7 @@ export class UploaderComponent implements OnInit {
   oddNums = "";
   modeNum = "";
   medianNum = "";
+  setsOfNumbasAbove100 = "";
 
   fileInfos?: Observable<any>;
 
@@ -92,6 +93,7 @@ export class UploaderComponent implements OnInit {
         this.oddNums = value[0].oddNums;
         this.modeNum = value[0].mode;
         this.medianNum = value[0].median;
+        this.setsOfNumbasAbove100 = value[0].setsOfNumbas100Upwards
   
         
       },
